@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as courseActions from '../../actions/courseActions';
@@ -13,6 +14,7 @@ class CoursesPage extends React.Component {
         return (
             <div>
                 <h1>Courses</h1>
+                <Link to="/course" className="btn btn-primary">Create Course</Link>
                 <CoursesList courses={this.props.courses} />
             </div>
         );

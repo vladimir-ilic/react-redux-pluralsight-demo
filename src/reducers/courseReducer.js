@@ -2,8 +2,10 @@ import * as actionTypes from '../actions/actionTypes';
 
 export default function courseReducer(state = [], action) {
     switch (action.type) {
-        case actionTypes.CREATE_COURSE:
-            return createNewCourse(action.course, state);
+        case actionTypes.CREATE_COURSE_SUCCESS:
+            return createNewCourseSuccess(action.course, state);
+        case actionTypes.UPDATE_COURSE_SUCCESS:
+            return updateCourseSuccess(action.course, state);
         case actionTypes.LOAD_COURSES_SUCCESS:
             return loadCoursesSuccess(action.courses);
         default:
@@ -14,6 +16,9 @@ export default function courseReducer(state = [], action) {
 function loadCoursesSuccess(courses) {
     return courses;
 }
-function createNewCourse(course, state) {
-    return [...state, Object.assign({}, course)];
+function createNewCourseSuccess(newCourse, state) {
+    return [...state, Object.assign({}, newCourse)];
+}
+function updateCourseSuccess(newCourse, state) {
+    return [...state.filter(course => course.id !== newCourse.id), Object.assign({}, newCourse)];
 }
