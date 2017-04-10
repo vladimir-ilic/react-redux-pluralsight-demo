@@ -1,0 +1,3 @@
+export const AJAX_CALL_SUCCESS_SUFFIX = "_SUCCESS";
+export const AJAX_CALL_START = "AJAX_CALL_START";
+export const AJAX_CALL_ERROR = "AJAX_CALL_ERROR";

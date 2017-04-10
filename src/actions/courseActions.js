@@ -1,11 +1,16 @@
 import * as actionTypes from './actionTypes';
+import { startAjaxCall, completeAjaxCallWithError } from './ajaxStatusActions';
 import CourseApi from '../api/mockCourseApi';
 
 export function loadCourses() {
     return function(dispatch) {
+        dispatch(startAjaxCall());
         CourseApi.getAllCourses()
             .then(courses => dispatch(loadCoursesSuccess(courses)))
-            .catch(error => { throw error; });
+            .catch(error => {
+                dispatch(completeAjaxCallWithError(error));
+                throw error;
+            });
     };
 }
 
@@ -18,13 +23,17 @@ function loadCoursesSuccess(courses) {
 
 export function saveCourse(course) {
     return function(dispatch) {
-        CourseApi.saveCourse(course)
+        dispatch(startAjaxCall());
+        return CourseApi.saveCourse(course)
             .then(newCourse => {
                 course.id ?
                     dispatch(updateCourseSuccess(newCourse)) :
                     dispatch(createCourseSuccess(newCourse));
             })
-            .catch(error => { throw error; });
+            .catch(error => {
+                dispatch(completeAjaxCallWithError(error));
+                throw error;
+            });
     };
 }
 
