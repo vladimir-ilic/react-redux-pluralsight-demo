@@ -6,6 +6,7 @@ const CourseForm = function ({course, allAuthors, onChange, onSave, saving, erro
 
     return (
         <form action="" className="form">
+            <h1>Manage Course</h1>
             <TextInput name="title"
                        label="Title"
                        value={course.title}
