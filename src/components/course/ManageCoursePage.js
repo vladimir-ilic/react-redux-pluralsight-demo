@@ -5,9 +5,10 @@ import {connect} from 'react-redux';
 import toastr from 'toastr';
 
 import * as courseActions from '../../actions/courseActions';
+import { authorsFormattedForDropdown } from '../../selectors/selectors';
 import CourseForm from './CourseForm';
 
-class ManageCoursePage extends React.Component {
+export class ManageCoursePage extends React.Component {
     constructor(props, context) {
         super(props, context);
 
@@ -132,12 +133,8 @@ function mapStateToProps(state, ownProps) {
 
     return {
         course: course,
-        authors: mapAuthorsToSelectView(state.authors)
+        authors: authorsFormattedForDropdown(state.authors)
     };
-}
-
-function mapAuthorsToSelectView(authors) {
-    return authors.map(author => { return { value: author.id, text: (author.firstName + " " + author.lastName) }; });
 }
 
 function mapDispatchToProps(dispatch) {
@@ -146,4 +143,5 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(ManageCoursePage));
+export const ManageCoursePageWithRouter = withRouter(ManageCoursePage);
+export default connect(mapStateToProps, mapDispatchToProps)(ManageCoursePageWithRouter);

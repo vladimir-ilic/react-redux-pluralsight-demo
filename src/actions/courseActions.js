@@ -5,7 +5,7 @@ import CourseApi from '../api/mockCourseApi';
 export function loadCourses() {
     return function(dispatch) {
         dispatch(startAjaxCall());
-        CourseApi.getAllCourses()
+        return CourseApi.getAllCourses()
             .then(courses => dispatch(loadCoursesSuccess(courses)))
             .catch(error => {
                 dispatch(completeAjaxCallWithError(error));
@@ -37,10 +37,10 @@ export function saveCourse(course) {
     };
 }
 
-function updateCourseSuccess(course ) {
+export function updateCourseSuccess(course ) {
     return { type: actionTypes.UPDATE_COURSE_SUCCESS, course };
 }
 
-function createCourseSuccess(course) {
+export function createCourseSuccess(course) {
     return { type: actionTypes.CREATE_COURSE_SUCCESS, course };
 }
